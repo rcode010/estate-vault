@@ -9,4 +9,12 @@ contract EstateVault {
     string public propertyMetadataURI;
 
     mapping(address => uint256) public balances;
+
+    constructor( uint256 _totalSupply, uint256 _pricePerToken, string memory _propertyMetadataURI){
+        admin = msg.sender;
+        totalSupply = _totalSupply;
+        pricePerToken = _pricePerToken;
+        propertyMetadataURI = _propertyMetadataURI;
+    }
+
 }
