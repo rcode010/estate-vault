@@ -17,4 +17,14 @@ contract EstateVault {
         propertyMetadataURI = _propertyMetadataURI;
     }
 
+    function  buyTokens(uint256 _amount) public payable{
+        uint256 totalCost = _amount * pricePerToken;
+        require(msg.value >= totalCost,"Not enough Ether sent");
+        require(tokensSold + _amount <= totalSupply,"Not enough tokens left");
+
+        balances[msg.sender] += _amount;
+        tokensSold += _amount;
+
+    }
+
 }
