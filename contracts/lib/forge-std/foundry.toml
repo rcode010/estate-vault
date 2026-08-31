@@ -16,3 +16,4 @@ needs_undefined_env_var = "${UNDEFINED_RPC_URL_PLACEHOLDER}"
 
 [lint]
 lint_on_build = false
+ignored_warnings_from = ["lib/"]
