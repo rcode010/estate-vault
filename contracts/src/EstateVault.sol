@@ -26,5 +26,9 @@ contract EstateVault {
         tokensSold += _amount;
 
     }
+    function withdrawFunds() public {
+        require(msg.sender == admin,"Only admin can withdraw");
+        payable(admin).transfer(address(this).balance);
+    }
 
 }
