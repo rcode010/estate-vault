@@ -70,4 +70,17 @@ contract EstateVaultTest is Test {
         // The buyer attempts to call the admin-only function
         vault.withdrawFunds();
     }
+    function testAdminCanDepositRent() public {
+        // 1. Give the admin some fake money to use
+        vm.deal(admin, 10 ether);
+
+        // 2. Pretend to be the admin
+        vm.prank(admin);
+
+        // 3. Admin deposits 5 Ether into the contract as monthly rent
+        vault.depositRent{value: 5 ether}();
+
+        // 4. Verify the contract's digital safe received the 5 Ether
+        assertEq(address(vault).balance, 5 ether);
+    }
 }
