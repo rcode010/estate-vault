@@ -83,4 +83,19 @@ contract EstateVaultTest is Test {
         // 4. Verify the contract's digital safe received the 5 Ether
         assertEq(address(vault).balance, 5 ether);
     }
+    function testTransferTokens() public {
+        // 1. Buyer buys 2 tokens
+        vm.prank(buyer);
+        vault.buyTokens{value: 2 ether}(2);
+
+        // 2. Buyer transfers 1 token to a new wallet (we'll just use address(3))
+        address friend = address(3);
+
+        vm.prank(buyer);
+        vault.transferTokens(friend, 1);
+
+        // 3. Verify the balances updated correctly
+        assertEq(vault.balances(buyer), 1);
+        assertEq(vault.balances(friend), 1);
+    }
 }

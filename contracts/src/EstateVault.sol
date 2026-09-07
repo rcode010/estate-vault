@@ -44,5 +44,13 @@ contract EstateVault {
 
         payable(msg.sender).transfer(amountToPay);
     }
+    function transferTokens(address to, uint256 amount) public {
+        require(balances[msg.sender] >= amount, "Insufficient tokens");
+        require(to != address(0), "Cannot send to the zero address");
+
+        balances[msg.sender] -= amount;
+
+        balances[to] += amount;
+    }
 
 }
