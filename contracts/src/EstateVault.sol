@@ -52,5 +52,11 @@ contract EstateVault {
 
         balances[to] += amount;
     }
+    function setTokenPrice(uint256 newPrice) public {
+        require(msg.sender == admin, "Only admin can set price");
+        require(newPrice > 0, "Price must be greater than zero");
+        
+        tokenPrice = newPrice;
+    }
 
 }

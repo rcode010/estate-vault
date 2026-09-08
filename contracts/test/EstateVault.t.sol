@@ -98,4 +98,14 @@ contract EstateVaultTest is Test {
         assertEq(vault.balances(buyer), 1);
         assertEq(vault.balances(friend), 1);
     }
+    function testAdminCanSetTokenPrice() public {
+        // 1. Pretend to be the admin
+        vm.prank(admin);
+        
+        // 2. Admin changes the price from 1 Ether to 3 Ether
+        vault.setTokenPrice(3 ether);
+        
+        // 3. Verify the contract's state actually updated
+        assertEq(vault.tokenPrice(), 3 ether);
+    }
 }
